@@ -6,7 +6,8 @@ import { Component, AfterViewInit, ElementRef } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'notes';
+  folder = "Folders";
+  notes = "Saved Notes";
 
   constructor(private elementRef: ElementRef){ }
 

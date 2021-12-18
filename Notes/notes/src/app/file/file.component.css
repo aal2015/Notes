@@ -1,4 +1,10 @@
+h3 {
+  text-align: center;
+  padding-top: 5px;
+}
+
 .header {
-  background-color: white ;
+  background-color: #72bcd4;
+  color: white;
   box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
 }
