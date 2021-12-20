@@ -6,5 +6,6 @@ h3 {
 .header {
   background-color: #72bcd4;
   color: white;
+  border-radius: 5px;
   box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
 }
