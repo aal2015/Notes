@@ -9,15 +9,18 @@ import { FileService } from '../file.service';
 })
 export class FileComponent implements OnInit {
   @Input() directory?: string;
-  fetched?: string[];
+  items?: string[];
+  buttonAddCaptin?: string;
 
   constructor(private fileService: FileService) { }
 
   ngOnInit(): void {
     if (this.directory === "Folders") {
-      this.fetched = this.fileService.fetchFolders();
+      this.items = this.fileService.fetchFolders();
+      this.buttonAddCaptin = "Add Folder"
     } else if (this.directory ==="Saved Notes") {
-      this.fetched = this.fileService.fetchNotes();
+      this.items = this.fileService.fetchNotes();
+      this.buttonAddCaptin = "Add Note"
     }
   }
 
