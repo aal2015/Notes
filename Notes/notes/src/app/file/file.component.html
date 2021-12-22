@@ -6,17 +6,22 @@
   <button type="button" class="btn btn-secondary addButton" (click)="addItem()">{{ buttonAddCaptin }}</button>
 </div>
 
-<!-- <div class="list-group">
-  <a *ngFor="let item of items" class="list-group-item list-group-item-action">{{ item }}</a>
-</div> -->
-
-<ul class="list-group">
-  <li *ngFor="let item of items" class="list-group-item d-flex justify-content-between">
-    <p class="mt-2 mb-0">{{ item }}</p>
+<ul class="list-group" *ngIf="buttonAddCaptin === 'Add Folder'; else noteDisplay">
+  <li *ngFor="let folder of folders" class="list-group-item d-flex justify-content-between">
+    <p class="mt-2 mb-0">{{ folder }}</p>
     <div class="btn-group right" role="group">
       <button type="button" class="btn btn-info">Rename</button>
       <button type="button" class="btn btn-danger">Delete</button>
     </div>
-
   </li>
 </ul>
+
+<ng-template #noteDisplay>
+  <li *ngFor="let note of notes" class="list-group-item d-flex justify-content-between">
+    <p class="mt-2 mb-0">{{ note }}</p>
+    <div class="btn-group right" role="group">
+      <button type="button" class="btn btn-info">Rename</button>
+      <button type="button" class="btn btn-danger">Delete</button>
+    </div>
+  </li>
+</ng-template>

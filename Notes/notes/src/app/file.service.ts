@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
-  folders_list: string[] = ["Office", "Home"];
-  notes_list: string[] = [];
-  // folders: string[] = [];
-  // notes: string[] = [];
+  foldersChanged = new Subject<string[]>();
+  private folders_list: string[] = ["Office", "Home"];
+  private notes_list: string[] = [];
+
   constructor() { }
 
   fetchFolders() {
@@ -21,7 +22,7 @@ export class FileService {
   addFolder() {
     this.folders_list.push("New Folder");
     console.log("added");
-
+    this.foldersChanged.next(this.folders_list.slice()); 
   }
 
   addNote() {
