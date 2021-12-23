@@ -15,7 +15,8 @@ export class FileComponent implements OnInit, OnDestroy {
   notes:string[] = [];
   buttonAddCaptin?: string;
   subscription1?: Subscription;
-  displayStyle = "none";
+  displayStyle: string = "none";
+  displayStyle2: string = "none";
   index: number = 0;
   renameString: string = "";
 
@@ -49,6 +50,16 @@ export class FileComponent implements OnInit, OnDestroy {
   }
   closePopup() {
     this.displayStyle = "none";
+  }
+
+  openPopup_delete(index: number) {
+    this.index = index;
+    this.displayStyle2 = "block";
+  }
+
+  closePopup_delete() {
+    this.displayStyle2 = "none";
+    this.fileService.deleteFolder(this.index);
   }
 
   ngOnDestroy() {

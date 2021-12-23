@@ -11,7 +11,7 @@
     <p class="mt-2 mb-0">{{ folder }}</p>
     <div class="btn-group right" role="group">
       <button type="button" class="btn btn-info" (click)="openPopup(i)">Rename</button>
-      <button type="button" class="btn btn-danger">Delete</button>
+      <button type="button" class="btn btn-danger" (click)="openPopup_delete(i)">Delete</button>
     </div>
   </li>
 </ul>
@@ -48,11 +48,35 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-danger">
+          <button type="submit" class="btn btn-primary">
             Save
           </button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{'display':displayStyle2}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Warning!!</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the folder? All it's content will be deleted permanently.</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger"
+                (click)="closePopup_delete()">
+          Confirm
+        </button>
+      </div>
     </div>
   </div>
 </div>

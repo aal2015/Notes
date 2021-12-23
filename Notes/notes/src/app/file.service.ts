@@ -29,6 +29,11 @@ export class FileService {
     this.foldersChanged.next(this.folders_list.slice());
   }
 
+  deleteFolder(index: number) {
+    this.folders_list.splice(index, 1);
+    this.foldersChanged.next(this.folders_list.slice());
+  }
+
   addNote() {
 
   }
