@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { FileService } from '../file.service';
@@ -10,10 +11,13 @@ import { FileService } from '../file.service';
 })
 export class FileComponent implements OnInit, OnDestroy {
   @Input() directory?: string;
-  folders?: string[];
-  notes?:string[]
+  folders: string[] = [];
+  notes:string[] = [];
   buttonAddCaptin?: string;
   subscription1?: Subscription;
+  displayStyle = "none";
+  index: number = 0;
+  renameString: string = "";
 
   constructor(private fileService: FileService) { }
 
@@ -31,6 +35,20 @@ export class FileComponent implements OnInit, OnDestroy {
         this.folders = folders;
       }
     );
+  }
+
+  onSubmit(form: NgForm) {
+    this.closePopup();
+    this.fileService.renameFolder(this.renameString, this.index)
+  }
+
+  openPopup(index: number) {
+    this.index = index;
+    this.renameString = this.folders[index];
+    this.displayStyle = "block";
+  }
+  closePopup() {
+    this.displayStyle = "none";
   }
 
   ngOnDestroy() {

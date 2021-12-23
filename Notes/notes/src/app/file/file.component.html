@@ -7,10 +7,10 @@
 </div>
 
 <ul class="list-group" *ngIf="buttonAddCaptin === 'Add Folder'; else noteDisplay">
-  <li *ngFor="let folder of folders" class="list-group-item d-flex justify-content-between">
+  <li *ngFor="let folder of folders; let i = index" class="list-group-item d-flex justify-content-between">
     <p class="mt-2 mb-0">{{ folder }}</p>
     <div class="btn-group right" role="group">
-      <button type="button" class="btn btn-info">Rename</button>
+      <button type="button" class="btn btn-info" (click)="openPopup(i)">Rename</button>
       <button type="button" class="btn btn-danger">Delete</button>
     </div>
   </li>
@@ -25,3 +25,34 @@
     </div>
   </li>
 </ng-template>
+
+<!-- Modal Implementation -->
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Rename {{ directory === 'Folders' ? 'Folder' : 'Note' }}</h4>
+      </div>
+
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-12 form-group">
+              <label for="name">Rename {{ directory === 'Folders' ? 'Folder' : 'Note' }}</label>
+              <input type="text" id="name" class="form-control" name="name" [(ngModel)]="renameString" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -21,8 +21,12 @@ export class FileService {
 
   addFolder() {
     this.folders_list.push("New Folder");
-    console.log("added");
-    this.foldersChanged.next(this.folders_list.slice()); 
+    this.foldersChanged.next(this.folders_list.slice());
+  }
+
+  renameFolder(new_name: string, index: number) {
+    this.folders_list[index] = new_name;
+    this.foldersChanged.next(this.folders_list.slice());
   }
 
   addNote() {
