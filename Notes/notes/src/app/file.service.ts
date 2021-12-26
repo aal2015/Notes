@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class FileService {
   foldersChanged = new Subject<string[]>();
-  private folders_list: string[] = ["Office", "Home"];
+  private folders_list: string[] = ["Office", "Home", "Shoppping", "Music", "Entertainment"];
   private notes_list: string[] = [];
 
   constructor() { }

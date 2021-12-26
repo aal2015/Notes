@@ -7,7 +7,11 @@
 </div>
 
 <ul class="list-group" *ngIf="buttonAddCaptin === 'Add Folder'; else noteDisplay">
-  <li *ngFor="let folder of folders; let i = index" class="list-group-item d-flex justify-content-between">
+  <li
+    *ngFor="let folder of folders; let i = index"
+    class="list-group-item d-flex justify-content-between"
+    (click)="select_folder(i)"
+    [ngClass]="{active: folder_select_status[i]}">
     <p class="mt-2 mb-0">{{ folder }}</p>
     <div class="btn-group right" role="group">
       <button type="button" class="btn btn-info" (click)="openPopup(i)">Rename</button>
@@ -69,11 +73,14 @@
       </div>
       <div class="modal-body">
         <p>Are you sure you want to delete the folder? All it's content will be deleted permanently.</p>
-
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+                (click)="closePopup_delete(false)">
+          Cancel
+        </button>
         <button type="button" class="btn btn-danger"
-                (click)="closePopup_delete()">
+                (click)="closePopup_delete(true)">
           Confirm
         </button>
       </div>

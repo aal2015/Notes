@@ -15,6 +15,8 @@ export class FileComponent implements OnInit, OnDestroy {
   notes:string[] = [];
   buttonAddCaptin?: string;
   subscription1?: Subscription;
+  folder_select_status: boolean[] = [];
+  current_selected_folder: number = -1;
   displayStyle: string = "none";
   displayStyle2: string = "none";
   index: number = 0;
@@ -26,6 +28,9 @@ export class FileComponent implements OnInit, OnDestroy {
     if (this.directory === "Folders") {
       this.folders = this.fileService.fetchFolders();
       this.buttonAddCaptin = "Add Folder";
+      for (var i = 0; i < this.folders.length; i++) {
+        this.folder_select_status.push(false);
+      }
     } else if (this.directory ==="Saved Notes") {
       this.notes = this.fileService.fetchNotes();
       this.buttonAddCaptin = "Add Note";
@@ -53,13 +58,21 @@ export class FileComponent implements OnInit, OnDestroy {
   }
 
   openPopup_delete(index: number) {
-    this.index = index;
+    this.folder_select_status.splice(index, 1);
     this.displayStyle2 = "block";
   }
 
-  closePopup_delete() {
+  closePopup_delete(remove: boolean) {
     this.displayStyle2 = "none";
-    this.fileService.deleteFolder(this.index);
+    if (remove) { this.fileService.deleteFolder(this.index); }
+  }
+
+  select_folder(index: number) {
+    if (this.current_selected_folder != -1) {
+      this.folder_select_status[this.current_selected_folder] = false;
+    }
+    this.folder_select_status[index] = true;
+    this.current_selected_folder = index;
   }
 
   ngOnDestroy() {
@@ -71,6 +84,7 @@ export class FileComponent implements OnInit, OnDestroy {
   addItem() {
     if (this.directory === "Folders") {
       this.fileService.addFolder();
+      this.folder_select_status.push(false);
     }
   }
 
