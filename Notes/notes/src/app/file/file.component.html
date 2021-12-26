@@ -15,7 +15,7 @@
     <p class="mt-2 mb-0">{{ folder }}</p>
     <div class="btn-group right" role="group">
       <button type="button" class="btn btn-info" (click)="openPopup(i)">Rename</button>
-      <button type="button" class="btn btn-danger" (click)="openPopup_delete(i)">Delete</button>
+      <button type="button" class="btn btn-danger" (click)="openPopup_delete()">Delete</button>
     </div>
   </li>
 </ul>
@@ -52,6 +52,10 @@
           </div>
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+                  (click)="closePopup()">
+            Cancel
+          </button>
           <button type="submit" class="btn btn-primary">
             Save
           </button>

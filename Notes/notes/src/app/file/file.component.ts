@@ -19,7 +19,6 @@ export class FileComponent implements OnInit, OnDestroy {
   current_selected_folder: number = -1;
   displayStyle: string = "none";
   displayStyle2: string = "none";
-  index: number = 0;
   renameString: string = "";
 
   constructor(private fileService: FileService) { }
@@ -45,11 +44,10 @@ export class FileComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm) {
     this.closePopup();
-    this.fileService.renameFolder(this.renameString, this.index)
+    this.fileService.renameFolder(this.renameString, this.current_selected_folder)
   }
 
   openPopup(index: number) {
-    this.index = index;
     this.renameString = this.folders[index];
     this.displayStyle = "block";
   }
@@ -57,14 +55,17 @@ export class FileComponent implements OnInit, OnDestroy {
     this.displayStyle = "none";
   }
 
-  openPopup_delete(index: number) {
-    this.folder_select_status.splice(index, 1);
+  openPopup_delete() {
     this.displayStyle2 = "block";
   }
 
   closePopup_delete(remove: boolean) {
+    console.log(this.current_selected_folder);
     this.displayStyle2 = "none";
-    if (remove) { this.fileService.deleteFolder(this.index); }
+    if (remove) {
+      this.folder_select_status.splice(this.current_selected_folder, 1);
+      this.fileService.deleteFolder(this.current_selected_folder);
+    }
   }
 
   select_folder(index: number) {
